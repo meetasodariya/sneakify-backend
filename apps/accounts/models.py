@@ -57,3 +57,14 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"Profile of {self.user.email}"
+
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+@receiver(post_save, sender=CustomUser)
+def create_or_save_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.get_or_create(user=instance)
+    else:
+        if hasattr(instance, 'profile'):
+            instance.profile.save()
