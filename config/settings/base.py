@@ -179,7 +179,17 @@ CORS_ALLOWED_ORIGINS = env.list(
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = DEBUG  # Allow all in local debug mode
 
+# CSRF Configuration for Production & Admin Login
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.onrender.com',
+    'https://sneakify-backend-o0lb.onrender.com',
+    'https://sneakify-studio.vercel.app',
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+]
+
 # Razorpay Configuration
 RAZORPAY_KEY_ID = env('RAZORPAY_KEY_ID', default='')
 RAZORPAY_KEY_SECRET = env('RAZORPAY_KEY_SECRET', default='')
 RAZORPAY_WEBHOOK_SECRET = env('RAZORPAY_WEBHOOK_SECRET', default='')
+
